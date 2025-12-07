@@ -1,11 +1,16 @@
-function countVowels(str) {
-    let count = 0;
-    for(let i=0; i<str.length; i++) {
-        if('aeiou'.includes(str[i].toLowerCase())) {
-            count++;
-        }
+function isPalindrome(str) {
+  str = str.toLowerCase();  
+  let i=0;
+  let j=str.length-1;
+
+  while(i !== j) {
+    if(str[i] !== str[j]) {
+        return false;
     }
-    return count;
+    i++;
+    j--;
+  }
+  return true;
 }
 
-console.log(countVowels('DhirAj'));
+console.log(isPalindrome('Dhiraj'));
