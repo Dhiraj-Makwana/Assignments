@@ -1,4 +1,11 @@
-let str1 = 'DHIraj';
-str1 = str1.toLowerCase();
-console.log(str1);
-const file = require("./tests/expenditure-analysis.test")
+function findLargestElement(numbers) {
+    let large = Number.NEGATIVE_INFINITY;
+    for(let i=0; i<numbers.length; i++) {
+        if(numbers[i] >= large) {
+            large = numbers[i];
+        }
+    }
+    return large;
+}
+
+console.log(findLargestElement([-5, -10, -2, -8]));
