@@ -1,11 +1,11 @@
-function findLargestElement(numbers) {
-    let large = Number.NEGATIVE_INFINITY;
-    for(let i=0; i<numbers.length; i++) {
-        if(numbers[i] >= large) {
-            large = numbers[i];
+function countVowels(str) {
+    let count = 0;
+    for(let i=0; i<str.length; i++) {
+        if('aeiou'.includes(str[i].toLowerCase())) {
+            count++;
         }
     }
-    return large;
+    return count;
 }
 
-console.log(findLargestElement([-5, -10, -2, -8]));
+console.log(countVowels('DhirAj'));
