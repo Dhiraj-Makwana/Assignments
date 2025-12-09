@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.button-box {
+    display: flex;
+    gap: 30px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btn {
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#red {
+    background-color: red;
+}
+
+#black {
+    background-color: black;
+    color: white;
+}
+
+#green {
+    background-color: green;
+    color: white;
+}
+
+#blue {
+    background-color: blue;
+    color: white;
+}
+
+#yellow {
+    background-color: yellow;
+    color: red;
+}

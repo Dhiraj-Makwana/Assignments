@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG Color Changer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+
+        function change(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+    </script>
+</head>
+<body>
+
+    <div class="button-box">
+        <div class="btn" id="red" onclick="change('red')">Red</div>
+        <div class="btn" id="black" onclick="change('black')">Black</div>
+        <div class="btn" id="green" onclick="change('green')">Green</div>
+        <div class="btn" id="blue" onclick="change('blue')">Blue</div>
+        <div class="btn" id="yellow" onclick="change('yellow')">Yellow</div>
+    </div>
+    
+    
+</body>
+</html>
