@@ -4,11 +4,12 @@ function App() {
 
   return (
     <div>
-      <a href="/">Allen</a> | {/* when you navigate through pages using <a>,
-      Every render fetch all HTML each time that's why loading happens everytime */}
-      <a href="/neet/online-coaching-class-11">Class 11</a> | 
-      <a href="/neet/online-coaching-class-12">Class 12</a>
       <BrowserRouter>
+        <Link to="/">Allen</Link> | {/* when you navigate through pages using <Link> or <Navigate>,
+        Every render fetch just needed HTML each time that's why loading does not happens everytime |
+        which is the main feature of SPA(Single Page Application) */}
+        <Link to="/neet/online-coaching-class-11">Class 11</Link> | 
+        <Link to="/neet/online-coaching-class-12">Class 12</Link>
         <Routes>
           <Route path="/neet/online-coaching-class-11" element={<Class11Program />} />
           <Route path="/neet/online-coaching-class-12" element={<Class12Program />} />
