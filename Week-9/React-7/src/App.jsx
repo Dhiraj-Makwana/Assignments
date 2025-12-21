@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom"
 
 function App() {
 
@@ -33,8 +33,13 @@ function Class11Program() {
 }
 
 function Class12Program() {
+  const navigate = useNavigate();
+  function redirectUser() {
+    navigate("/")
+  }
   return <div>
     Class 12th content is here which you are looking for...
+    <button onClick={redirectUser} >Go Back to Landing Page</button>
   </div>
 }
 
