@@ -14,10 +14,22 @@ function App() {
           <Route path="/neet/online-coaching-class-11" element={<Class11Program />} />
           <Route path="/neet/online-coaching-class-12" element={<Class12Program />} />
           <Route path="/" element={<Landing />} />
+          <Route path="*" element={<ErrorPage />} /> {/* When user trying to access random route */}
         </Routes>
       </BrowserRouter>
     </div>
   )
+}
+
+function ErrorPage() {
+  const navigate = useNavigate();
+  function redirectUser() {
+    navigate("/")
+  }
+  return <div>
+    Page not Found
+    <button onClick={redirectUser} >Home</button>
+  </div>
 }
 
 function Landing() {
