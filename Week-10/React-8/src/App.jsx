@@ -2,17 +2,25 @@ import { useState, createContext, useContext } from 'react'
 
 const BulbContext = createContext();  //create context
 
-function App() {
+//BulbProvider is a BlackBox component(own wrapper) to hide what happend under the hood like abstraction
+function BulbProvider({ children }) {
   const [bulbOn, setBulbOn] = useState(false); //prop drilling(problem: complexity, maintanance) => Context API(solution)
+
+  return <BulbContext.Provider value={{ //context Provider
+      bulb: bulbOn,
+      setBulbOn: setBulbOn
+    }}>
+      { children }
+  </BulbContext.Provider>      
+}
+
+function App() {
 
   return (
     <div>
-      <BulbContext.Provider value={{ //context Provider
-        bulb: bulbOn,
-        setBulbOn: setBulbOn
-      }}>
+      <BulbProvider>
       <LightBulb />
-      </BulbContext.Provider>
+      </BulbProvider>
     </div>
   )
 }
@@ -32,8 +40,7 @@ function BulbState() {
 }
 
 function ToggleBulbState() {
-  const { bulb } = useContext(BulbContext)
-  const { setBulbOn } = useContext(BulbContext)
+  const { bulb, setBulbOn } = useContext(BulbContext)
 
   function Toggle() {
     //setBulbOn(currentState => !currentState)
