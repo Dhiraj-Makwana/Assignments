@@ -1,12 +1,22 @@
 import { useState } from 'react'
 import './App.css'
 
-function App() {
+//custom hook
+function useCounter() {
   const [count, setCnt] = useState(0)
 
   function increase() {
     setCnt((c) => c + 1)
   }
+
+  return {
+    count: count,
+    increase: increase
+  }
+}
+
+function App() {
+  const {count, increase} = useCounter()
 
   return (
     <>        
