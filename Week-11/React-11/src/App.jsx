@@ -1,11 +1,11 @@
 import './App.css'
-import { usePostTitle } from "./hooks/useFetch"
+import { useFetch } from "./hooks/useFetch"
 
 function App() {
-  const postTitle = usePostTitle()
+  const { finalData } = useFetch("https://jsonplaceholder.typicode.com/posts/1")
   return (
     <div>
-      {postTitle}
+      {JSON.stringify(finalData)}
     </div>
   )
 }
