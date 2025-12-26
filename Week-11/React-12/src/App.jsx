@@ -1,30 +1,35 @@
 import './App.css'
-import { useState } from "react"
-import { RecoilRoot } from "recoil"
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil"
+import { countAtom } from "./atoms/counter"
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <Counter count={count} />
-      <Increase setCount={setCount} />
-      <Decrease setCount={setCount}/>
-      <IsEven count={count} />
-    </>
+    <RecoilRoot>
+      <Counter />
+      <Increase />
+      <Decrease />
+      <IsEven />
+    </RecoilRoot>
   )
 }
 
-function IsEven({count}) {
+function IsEven() {
+  const count = useRecoilValue(countAtom)
   const bin = count%2 == 0 ? "Even" : "Odd"
+
   return <h1>{bin}</h1>
 }
 
-function Counter({count}) {
+function Counter() {
+  const count = useRecoilValue(countAtom)
+
   return <div>{count}</div>
 }
 
-function Increase({setCount}) {
+function Increase() {
+  const setCount = useSetRecoilState(countAtom)
+
   function Inc() {
     setCount(c => c + 2)
   }
@@ -32,7 +37,9 @@ function Increase({setCount}) {
   return <button onClick={Inc}>Increase</button>
 }
 
-function Decrease({setCount}) {
+function Decrease() {
+  const setCount = useSetRecoilState(countAtom)
+
   function Dec() {
     setCount(c => c - 1)
   }
