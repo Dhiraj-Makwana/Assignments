@@ -1,6 +1,6 @@
 import './App.css'
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil"
-import { countAtom } from "./atoms/counter"
+import { countAtom, isEvenSelector } from "./atoms/counter"
 
 function App() {
 
@@ -15,10 +15,8 @@ function App() {
 }
 
 function IsEven() {
-  const count = useRecoilValue(countAtom)
-  const bin = count%2 == 0 ? "Even" : "Odd"
-
-  return <h1>{bin}</h1>
+  const isEven = useRecoilValue(isEvenSelector)
+  return <h1>{isEven}</h1>
 }
 
 function Counter() {
