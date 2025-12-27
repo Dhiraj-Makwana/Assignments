@@ -1,11 +1,12 @@
+import FocusInput  from "./Focus"
 import './App.css'
 
 function App() {
 
   return (
-    <>
-      Hi there
-    </>
+    <div>
+      <FocusInput />
+    </div>
   )
 }
 
