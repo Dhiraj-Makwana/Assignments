@@ -1,26 +1,21 @@
-// ugly code
-import React, { useState } from 'react';
+// better code
+import React, { useState, useRef } from 'react';
 
 function Stopwatch() {
   const [time, setTime] = useState(0);
-  const [intervalId, setIntervalId] = useState(null); // Use state to store the interval ID
+  const intervalRef = useRef(null);
 
   const startTimer = () => {
-    if (intervalId !== null) return; // Already running, do nothing
+    if (intervalRef.current !== null) return; // Already running, do nothing
 
-    const newIntervalId = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setTime((prevTime) => prevTime + 1);
     }, 1000);
-    
-    // Store the interval ID in state (triggers re-render)
-    setIntervalId(newIntervalId);
   };
 
   const stopTimer = () => {
-    clearInterval(intervalId);
-
-    // Clear the interval ID in state (triggers re-render)
-    setIntervalId(null);
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
   };
 
   return (
