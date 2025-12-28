@@ -1,10 +1,11 @@
 import './App.css'
+import Chat from "./Scroll"
 
 function App() {
 
   return (
     <div>
-      Hi there
+      <Chat />
     </div>
   )
 }
