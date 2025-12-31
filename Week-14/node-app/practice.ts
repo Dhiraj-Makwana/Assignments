@@ -1,3 +1,2 @@
-const x:number = 1;
-x = "Dhiraj";
+const x:string= "Dhiraj";
 console.log(x);
