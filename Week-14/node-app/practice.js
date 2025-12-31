@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const x = "Dhiraj";
-console.log(x);
+function greet(firstName) {
+    console.log("Hello " + firstName);
+}
+greet("Dhiraj");
 //# sourceMappingURL=practice.js.map

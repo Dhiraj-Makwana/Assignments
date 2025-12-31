@@ -1,2 +1,5 @@
-const x:string= "Dhiraj";
-console.log(x);
+function greet(firstName: string) {
+    console.log("Hello "+ firstName)
+}
+
+greet("Dhiraj")
