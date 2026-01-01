@@ -1,7 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function greet(firstName) {
-    console.log("Hello " + firstName);
+let user = {
+    firstName: "Dhiraj",
+    lastName: "Makwana",
+    email: "dhirajmakwana33912@gmail.com",
+    age: 16
+};
+function isLegal(u) {
+    if (u.age >= 18) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
-greet("Dhiraj");
+console.log(isLegal(user));
 //# sourceMappingURL=practice.js.map
