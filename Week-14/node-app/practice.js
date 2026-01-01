@@ -1,13 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function getMax(nums) {
-    let maxVal = -1000000;
-    for (let num of nums) {
-        if (num > maxVal) {
-            maxVal = num;
-        }
+let user = [
+    {
+        firstName: "Dhiraj",
+        lastName: "Makwana",
+        age: 21
+    },
+    {
+        firstName: "Bharvi",
+        lastName: "Patel",
+        age: 14
+    },
+    {
+        firstName: "Rishi",
+        lastName: "Patel",
+        age: 17
+    },
+    {
+        firstName: "Bhavya",
+        lastName: "Mishra",
+        age: 22
+    },
+    {
+        firstName: "Gayatri",
+        lastName: "Kharva",
+        age: 23
     }
-    return maxVal;
+];
+function getLegal(people) {
+    return people.filter(u => u.age > 18).map(u => ({ firstName: u.firstName, age: u.age }));
 }
-console.log(getMax([5, 1, 2, 3]));
+console.log(getLegal(user));
 //# sourceMappingURL=practice.js.map
