@@ -1,25 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let user = {
-    firstName: "Dhiraj",
-    lastName: "Makwana",
-    email: "dhirajmakwana33912@gmail.com",
-    age: 21,
-    address: {
-        city: "Jambusar",
-        country: "India",
-        pincode: 392150
+function getMax(nums) {
+    let maxVal = -1000000;
+    for (let num of nums) {
+        if (num > maxVal) {
+            maxVal = num;
+        }
     }
-};
-function isLegal(u) {
-    if (u.age >= 18) {
-        console.log(u.address?.pincode);
-        return true;
-    }
-    else {
-        console.log(u.address);
-        return false;
-    }
+    return maxVal;
 }
-console.log(isLegal(user));
+console.log(getMax([5, 1, 2, 3]));
 //# sourceMappingURL=practice.js.map
