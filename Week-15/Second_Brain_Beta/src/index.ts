@@ -5,8 +5,15 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import z from "zod";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+dotenv.config();
 
-const JWT_SECRET = "World$Be$tProgrammer";
+const JWT_SECRET = process.env.JWT_PASSWORD;
+
+if(!JWT_SECRET) {
+    throw new Error("JWT SECRET is not defined in environment variables")
+}
+
 const app = express();
 app.use(express.json());
 
