@@ -1,17 +1,18 @@
 import express from "express";
-import { UserModel, ContentModel } from "./db.js";
+import { UserModel, ContentModel, LinkModel } from "./db.js";
 import { userMiddleware } from "./Middleware.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import z from "zod";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { random } from "./utils.js";
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_PASSWORD;
 
-if(!JWT_SECRET) {
-    throw new Error("JWT SECRET is not defined in environment variables")
+if (!JWT_SECRET) {
+  throw new Error("JWT SECRET is not defined in environment variables");
 }
 
 const app = express();
@@ -87,20 +88,20 @@ app.post("/api/v1/signin", async (req, res) => {
       message: "Incorrect Credentials",
     });
   }
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
+  const isPasswordCorrect = await bcrypt.compare(
+    password,
+    existingUser.password
+  );
 
-    if (!isPasswordCorrect) {
-      res.status(403).json({
-        message: "Incorrect Credentials",
-      });
-    }
+  if (!isPasswordCorrect) {
+    res.status(403).json({
+      message: "Incorrect Credentials",
+    });
+  }
 
-    const token = jwt.sign( { id: existingUser._id }, JWT_SECRET );
+  const token = jwt.sign({ id: existingUser._id }, JWT_SECRET);
 
-    return res.json({ token });
+  return res.json({ token });
 });
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
@@ -129,10 +130,90 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
   });
 });
 
-app.delete("/api/v1/content", userMiddleware, (req, res) => {});
+app.delete("/api/v1/content", userMiddleware, async (req, res) => {
+  const contentId = req.body.contentId;
 
-app.post("/api/v1/brain/share", userMiddleware, (req, res) => {});
+  try {
+    await ContentModel.deleteOne({
+      _id: new mongoose.Types.ObjectId(contentId as string),
+      userId: new mongoose.Types.ObjectId(req.userId),
+    });
 
-app.get("/api/v1/brain/:shareLink", (req, res) => {});
+    res.json({
+      message: "Content Deleted Successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: "Failed to delete content",
+    });
+  }
+});
+
+// app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
+//   const share = req.body.share;
+//   if (share) {
+//     const existingLink = await LinkModel.findOne({
+//       userId: new mongoose.Types.ObjectId(req.userId),
+//     });
+
+//     if (existingLink) {
+//       res.json({
+//         hash: existingLink.hash,
+//       });
+//       return;
+//     }
+//     const hash = random(10);
+//     await LinkModel.create({
+//       userId: new mongoose.Types.ObjectId(req.userId),
+//       hash: hash,
+//     });
+//     res.json({
+//       message: "/share/" + hash,
+//     });
+//   } else {
+//     await LinkModel.deleteOne({
+//       userId: new mongoose.Types.ObjectId(req.userId),
+//     });
+
+//     res.json({
+//       message: "Removed link",
+//     });
+//   }
+// });
+
+// app.get("/api/v1/brain/:shareLink", async (req, res) => {
+//     const hash = req.params.shareLink;
+
+//     const link = await LinkModel.findOne({
+//         hash
+//     });
+
+//     if (!link) {
+//         res.status(411).json({
+//             message: "Sorry incorrect input"
+//         })
+//         return;
+//     }
+//     // userId
+//     const content = await ContentModel.find({
+//         userId: link.userId
+//     })
+
+//     const user = await UserModel.findOne({
+//         _id: link.userId
+//     })
+
+//     if (!user) {
+//         res.status(411).json({
+//             message: "user not found, error should ideally not happen"
+//         })
+//         return;
+//     }
+
+//     res.json({
+//         username: user.username,
+//         content: content
+//     })
+// });
 
 app.listen(3000);
