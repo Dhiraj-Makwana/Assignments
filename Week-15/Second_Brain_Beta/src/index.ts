@@ -97,29 +97,29 @@ app.post("/api/v1/signin", async (req, res) => {
 });
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
-//   const link = req.body.link;
-//   const title = req.body.title;
-//   const type = req.body.type;
+  const link = req.body.link;
+  const title = req.body.title;
+  const type = req.body.type;
 
-//   await ContentModel.create({
-//     link,
-//     title,
-//     type,
-//     userId: new mongoose.Types.ObjectId(req.userId),
-//     tags: [],
-//   });
-//   return res.json({
-//     message: "Content is added",
-//   });
-// });
+  await ContentModel.create({
+    link,
+    title,
+    type,
+    userId: new mongoose.Types.ObjectId(req.userId),
+    tags: [],
+  });
+  return res.json({
+    message: "Content is added",
+  });
+});
 
-// app.get("/api/v1/content", userMiddleware, async (req, res) => {
-//   const content = await ContentModel.find({
-//     userId: new mongoose.Types.ObjectId(req.userId),
-//   }).populate("userId", "username");
-//   res.json({
-//     content,
-//   });
+app.get("/api/v1/content", userMiddleware, async (req, res) => {
+  const content = await ContentModel.find({
+    userId: new mongoose.Types.ObjectId(req.userId),
+  }).populate("userId", "username");
+  res.json({
+    content,
+  });
 });
 
 app.delete("/api/v1/content", userMiddleware, (req, res) => {});
