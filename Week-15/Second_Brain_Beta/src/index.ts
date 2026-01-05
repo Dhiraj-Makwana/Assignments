@@ -63,37 +63,37 @@ app.post("/api/v1/signup", async (req, res) => {
 });
 
 app.post("/api/v1/signin", async (req, res) => {
-//   const result = SignUpSchema.safeParse(req.body);
+  const result = SignUpSchema.safeParse(req.body);
 
-//   if (!result.success) {
-//     return res.status(400).json({
-//       errors: result.error,
-//     });
-//   }
+  if (!result.success) {
+    return res.status(400).json({
+      errors: result.error,
+    });
+  }
 
-//   const { username, password } = result.data;
+  const { username, password } = result.data;
 
-//   const existingUser = await UserModel.findOne({ username });
+  const existingUser = await UserModel.findOne({ username });
 
-//   if (!existingUser) {
-//     return res.status(403).json({
-//       message: "Incorrect Credentials",
-//     });
-//   }
-//     const isPasswordCorrect = await bcrypt.compare(
-//       password,
-//       existingUser.password
-//     );
+  if (!existingUser) {
+    return res.status(403).json({
+      message: "Incorrect Credentials",
+    });
+  }
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
 
-//     if (!isPasswordCorrect) {
-//       res.status(403).json({
-//         message: "Incorrect Credentials",
-//       });
-//     }
+    if (!isPasswordCorrect) {
+      res.status(403).json({
+        message: "Incorrect Credentials",
+      });
+    }
 
-//     const token = jwt.sign( { id: existingUser._id }, JWT_SECRET );
+    const token = jwt.sign( { id: existingUser._id }, JWT_SECRET );
 
-//     return res.json({ token });
+    return res.json({ token });
 });
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
