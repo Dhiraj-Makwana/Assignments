@@ -12,8 +12,8 @@ export function Sidebar() {
             Second Brain
         </div>
         <div className="pt-4">
-            <SidebarItems text="Twitter" icon={<TwitterIcon />} />
-            <SidebarItems text="Youtube" icon={<YoutubeIcon />} />
+            <SidebarItems text="Tweets" icon={<TwitterIcon />} />
+            <SidebarItems text="Videos" icon={<YoutubeIcon />} />
         </div>
     </div>
 }
