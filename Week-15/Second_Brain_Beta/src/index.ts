@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import z from "zod";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import cors from "cors"
 import { random } from "./utils.js";
 dotenv.config();
 
@@ -17,6 +18,7 @@ if (!JWT_SECRET) {
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 /*----------SignUp_&_SignIn----------*/
 const SignUpSchema = z.object({
