@@ -4,6 +4,11 @@ const ws_1 = require("ws");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
 wss.on("connection", function (socket) {
     console.log("User connected");
-    socket.send("hello");
+    setInterval(() => {
+        socket.send("Current price of solana: " + Math.random());
+    }, 500);
+    socket.on("message", (e) => {
+        console.log(e.toString());
+    });
 });
 //# sourceMappingURL=index.js.map
