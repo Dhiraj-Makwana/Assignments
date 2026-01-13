@@ -10,6 +10,6 @@ wss.on("connection", (socket) => {
 
     socket.on("message", (message) => {
         console.log("message received :"+ message.toString())
-        socket.send(message.toString() + " : send msg to server")
+        socket.send(message.toString() + " : sent msg from server")
     })
 })
