@@ -6,5 +6,9 @@ let userCount = 0;
 wss.on("connection", (socket) => {
     userCount += 1;
     console.log("User connected #" + userCount);
+    socket.on("message", (message) => {
+        console.log("message received :" + message.toString());
+        socket.send(message.toString() + " : send msg to server");
+    });
 });
 //# sourceMappingURL=index.js.map
