@@ -2,17 +2,30 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = require("ws");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
-let userCount = 0;
 let allSockets = [];
 wss.on("connection", (socket) => {
-    allSockets.push(socket);
-    userCount += 1;
-    console.log("User connected #" + userCount);
     socket.on("message", (message) => {
-        console.log("message received :" + message.toString());
-        allSockets.forEach((s) => {
-            s.send(message.toString() + " : sent msg from server");
-        });
+        const parsedMessage = JSON.parse(message);
+        if (parsedMessage.type === "join") {
+            allSockets.push({
+                socket,
+                room: parsedMessage.payload.roomId
+            });
+        }
+        if (parsedMessage.type === "chat") {
+            //const currentRoom = allSockets.find((x) => x.socket == socket).room
+            let currentRoom = null;
+            for (let i = 0; i < allSockets.length; i++) {
+                if (allSockets[i]?.socket === socket) {
+                    currentRoom = allSockets[i]?.room;
+                }
+            }
+            for (let i = 0; i < allSockets.length; i++) {
+                if (allSockets[i]?.room === currentRoom) {
+                    allSockets[i]?.socket.send(parsedMessage.payload.message);
+                }
+            }
+        }
     });
 });
 //# sourceMappingURL=index.js.map
